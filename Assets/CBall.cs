@@ -14,7 +14,7 @@ public class CBall : MonoBehaviour
 	public const float rotateSpeed = 20.0f;
 
 	// 射出の際のスピード係数
-	public const float shotSpeedCoefficient = 20.0f;
+	public const float shotSpeedCoefficient = 10.0f;
 	public const int COLOR_TYPE_START = 1;
 
 	// マテリアル
@@ -44,7 +44,6 @@ public class CBall : MonoBehaviour
 	{
 //		shotBall ();
 	
-		Debug.Log (_rigidBody);
 		setColor ();
 //		setKinematic ();
 	}
