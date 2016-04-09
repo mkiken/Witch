@@ -22,7 +22,7 @@ public class CStage : MonoBehaviour
 //		Debug.Log(stage.transform.localPosition.x);
 //		Debug.Log(stage.GetComponent<Renderer>());
 		// ステージの柵の太さのバッファ
-		float bufferWidth = 0.8f;
+		float bufferWidth = 0.7f;
 		float bufferHeight = 0.0f;
 		float stageX = stage.transform.localPosition.x + bufferWidth;
 		float stageY = stage.transform.localPosition.y + bufferHeight;

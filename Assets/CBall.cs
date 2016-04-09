@@ -11,10 +11,10 @@ public class CBall : MonoBehaviour
 	// 回転の中心になるオブジェクト
 	//	public Transform centerOfRotate;
 	// 回転のスピード
-	public const float rotateSpeed = 20.0f;
+	public const float rotateSpeed = 50.0f;
 
 	// 射出の際のスピード係数
-	public const float shotSpeedCoefficient = 10.0f;
+	public const float shotSpeedCoefficient = 20.0f;
 	public const int COLOR_TYPE_START = 1;
 
 	// マテリアル
