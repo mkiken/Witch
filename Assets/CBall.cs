@@ -21,6 +21,8 @@ public class CBall : MonoBehaviour
 	private Rigidbody _rigidBody;
 	public Material material;
 
+	private CPlayer battery = null;
+
 	public enum ColorType
 	{
 		RED = COLOR_TYPE_START,
@@ -81,6 +83,9 @@ public class CBall : MonoBehaviour
 //			http://www.happytrap.jp/blogs/2012/01/14/6719/
 			_rigidBody.velocity = Vector3.zero;
 			_rigidBody.angularVelocity = Vector3.zero;
+			if (battery != null){
+				battery.stopPlayerBall ();
+			}
 		}
 	}
 
@@ -115,5 +120,9 @@ public class CBall : MonoBehaviour
 
 	public virtual void setKinematic(){
 		_rigidBody.isKinematic = true;
+	}
+
+	public void setBattery(CPlayer target){
+		battery = target;
 	}
 }

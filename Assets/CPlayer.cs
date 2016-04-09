@@ -11,6 +11,7 @@ public class CPlayer : MonoBehaviour {
 
 	// ボールのインスタンス
 	GameObject insBall = null;
+	GameObject insBall2 = null;
 
 
 	// Use this for initialization
@@ -32,9 +33,11 @@ public class CPlayer : MonoBehaviour {
 				insBall = null;
 			}
 		}
+		if (insBall == null && insBall2 == null){
+			createHoldBall ();
+		}
 	
 	}
-
 
 	// ボールを生成して、砲台にくっつける
 	void createHoldBall(){
@@ -52,11 +55,17 @@ public class CPlayer : MonoBehaviour {
 回転はなし(Quaternion.identity)
 				*/
 		insBall = (GameObject)Instantiate (prefBall, bpos, Quaternion.identity);
+		insBall2 = insBall;
 		insBall.AddComponent <CBall> ();
 		/*
 生成したボールをプレイヤーバーの子オブジェクトにする
 生成したボールのインスタンス(insBall)の姿勢情報(transform)の親(parent)に、プレイヤーバーの姿勢情報(transform)を設定することで、子オブジェクトとすることが出来る
 		*/
 		insBall.transform.parent = transform;
+		insBall.SendMessage ("setBattery", this);
+	}
+
+	public void stopPlayerBall (){
+		insBall2 = null;
 	}
 }

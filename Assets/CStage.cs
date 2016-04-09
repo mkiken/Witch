@@ -35,7 +35,6 @@ public class CStage : MonoBehaviour
 		// フィールドの上から左端らかstageWidth * stageHeight分敷き詰める
 		for (float i = stageX; i < stageX + stageWidth; i += bubbleWidth) {
 			for (float j = stageY; j < stageY + stageHeight; j += bubbleHeight) {
-				Debug.Log (i + ", " + j);
 				makeCBubbleEnemy (i, j, 0);
 			}
 
