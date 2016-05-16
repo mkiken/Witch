@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class CStage : MonoBehaviour
 {
@@ -7,17 +8,28 @@ public class CStage : MonoBehaviour
 	// バブルのプレハブをここに代入
 	public GameObject bubble;
 	public GameObject stage;
+	
+	public List<CBall>[] bubbleListMap;
 
 	// Use this for initialization
 	void Start ()
 	{
+		// bubbleListMapの初期化
+		// TODO CBallのCOlorTypeの数をとってきたい
+		bubbleListMap = new List<CBall>[6];
+		for (int i = 0; i < 6; i++)
+		{
+			bubbleListMap[i] = new List<CBall>();
+		}
+	
+		// ボール配置
 		initializeArrange ();
 
 	
 	}
 
-	private void initializeArrange ()
-	{
+	private void initializeArrange (){
+
 //		Debug.Log(stage.transform.position);
 //		Debug.Log(stage.transform.localPosition.x);
 //		Debug.Log(stage.GetComponent<Renderer>());
@@ -70,8 +82,56 @@ public class CStage : MonoBehaviour
 //			Instantiate (bubble, new Vector3 (x, y, z), Quaternion.identity);
 		CBubbleEnemy cb = b.AddComponent<CBubbleEnemy> ();
 		cb.setColor ();
+		cb.setStage(this);
+		
+		// bubbleListMapに情報を保存しておく
+		bubbleListMap[cb.getColor()].Add(cb);
 		
 	}
+	
+	/**
+	* バブルのチェイン数を更新する
+	*/
+	public int updateBubblesChainCount(int bubbleColor){
+		List<CBall> targetList = bubbleListMap[bubbleColor];
+		
+		for (int i = 0; i < targetList.Count; i++)
+		{
+			int chainCount = getBubbleChainCount(targetList[i]);
+			if (chainCount >= 2){
+			// 削除する
+				
+			}
+		}
+		return 0;
+	}
+	
+//	public int getBubbleChainCount(CBall bubble){
+//		if (bubble.chainCount == CBall.SEARCH_CHAIN_COUNT_NOW){
+//			// 調査中のものは無視する
+//			return 0;
+//		}
+//		List<CBall> targetList = bubbleListMap[bubble.getColor()];
+//		// 調査中フラグをつける
+//		bubble.chainCount = CBall.SEARCH_CHAIN_COUNT_NOW;
+//		int result = 0;
+//		for (int i = 0; i < targetList.Count; i++)
+//		{
+//			// 自分はスルー
+////			if (System.Object.ReferenceEquals(bubble, targetList[i]){
+////			    continue;
+////			}
+//
+//			// 接しているか判定
+//
+//			// 接していたら結果を追加
+//			result += getBubbleChainCount(targetList[i]);
+//		}
+//		bubble.chainCount = result;
+//		return result;
+//	}
+public void addBubbleToGroup(){
+}
 	
 	// Update is called once per frame
 	void Update ()
