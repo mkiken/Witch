@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+[System.Serializable]
 public class CBall : MonoBehaviour
 {
 
@@ -22,7 +22,6 @@ public class CBall : MonoBehaviour
 	public Material material;
 
 	private CPlayer battery = null;
-	private CStage stage = null;
 
 	public enum ColorType
 	{
@@ -63,8 +62,7 @@ public class CBall : MonoBehaviour
 
 	// Update is called once per frame
 	void Update ()
-	{
-
+ {
 	}
 
 	void shotBall (Transform centerOfRotate)
@@ -97,9 +95,10 @@ public class CBall : MonoBehaviour
 			if (battery != null){
 				battery.stopPlayerBall ();
 			}
+			Debug.Log (CStage.Instance.GetInstanceID ());
 			// 相手と色が同じだったら
-			CBall other = (col.gameObject);
-			int otherColor = col.gameObject.SendMessage("getColor");
+			CBall other = (col.gameObject.GetComponent<CBall> ());
+			int otherColor = other.getColor ();
 			if (otherColor == _bubbleColor){
 			// 同じグループに入れる
 			}
@@ -141,10 +140,6 @@ public class CBall : MonoBehaviour
 
 	public void setBattery(CPlayer target){
 		battery = target;
-	}
-
-	public void setStage(CStage target){
-		stage = target;
 	}
 
 	public int getColor(){

@@ -2,12 +2,18 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class CStage : MonoBehaviour
+public class CStage : SingletonMonoBehaviourFast<CStage>
 {
 
 	// バブルのプレハブをここに代入
 	public GameObject bubble;
-	public GameObject stage;
+	public CBall test;
+	public List<Group> groups;
+	[System.Serializable]
+	public class Group{
+		public int groupId;
+		public List<int> color;
+	}
 	
 	public List<CBall>[] bubbleListMap;
 
@@ -30,9 +36,12 @@ public class CStage : MonoBehaviour
 
 	private void initializeArrange (){
 
+		CStage stage = CStage.Instance;
 //		Debug.Log(stage.transform.position);
 //		Debug.Log(stage.transform.localPosition.x);
 //		Debug.Log(stage.GetComponent<Renderer>());
+		Debug.Log (stage.GetInstanceID ());
+		Debug.Log (CStage.Instance.GetInstanceID ());
 		// ステージの柵の太さのバッファ
 		float bufferWidth = 0.7f;
 		float bufferHeight = 0.0f;
@@ -82,8 +91,7 @@ public class CStage : MonoBehaviour
 //			Instantiate (bubble, new Vector3 (x, y, z), Quaternion.identity);
 		CBubbleEnemy cb = b.AddComponent<CBubbleEnemy> ();
 		cb.setColor ();
-		cb.setStage(this);
-		
+
 		// bubbleListMapに情報を保存しておく
 		bubbleListMap[cb.getColor()].Add(cb);
 		
@@ -97,11 +105,11 @@ public class CStage : MonoBehaviour
 		
 		for (int i = 0; i < targetList.Count; i++)
 		{
-			int chainCount = getBubbleChainCount(targetList[i]);
-			if (chainCount >= 2){
-			// 削除する
-				
-			}
+//			int chainCount = getBubbleChainCount(targetList[i]);
+//			if (chainCount >= 2){
+//			// 削除する
+//				
+//			}
 		}
 		return 0;
 	}
